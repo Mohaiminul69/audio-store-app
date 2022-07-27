@@ -6,6 +6,9 @@ import { useFonts } from "expo-font";
 import Home from "./src/Screens/Home";
 import { presets } from "./src/Components/Text/text.preset";
 import Text from "./src/Components/Text/Text";
+import FlashMessage from "react-native-flash-message";
+import Navigation from "./src/Navigation/Index";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -19,9 +22,11 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        <Text preset="h3" style={{ marginTop: 80 }}>
-          Hello
-        </Text>
+        <SafeAreaProvider>
+          <Navigation />
+          <StatusBar />
+          <FlashMessage position="top" floating statusBarHeight={30} />
+        </SafeAreaProvider>
       </Provider>
     );
   }
