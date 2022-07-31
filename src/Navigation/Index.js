@@ -8,6 +8,12 @@ import Earphones from "../Screens/Earphones";
 import Speakers from "../Screens/Speakers";
 import Cart from "../Screens/Cart";
 import Cheakout from "../Screens/Cheakout";
+import { colors } from "../Theme";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 
 const THEME = {
   ...DefaultTheme,
@@ -71,32 +77,93 @@ function CartStackScreen() {
   );
 }
 
+const TabBarIcons = ({ fontFamily, name, color }) => {
+  if (fontFamily === "MaterialCommunityIcons") {
+    return <MaterialCommunityIcons name={name} size={24} color={color} />;
+  } else if (fontFamily === "Ionicons") {
+    return <Ionicons name={name} size={24} color={color} />;
+  } else if (fontFamily === "SimpleLineIcons") {
+    return <SimpleLineIcons name={name} size={24} color={color} />;
+  }
+};
+
 export default function Navigation() {
   return (
     <NavigationContainer theme={THEME}>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: colors.primary,
+        }}
+      >
         <Tab.Screen
-          options={{ title: "Home" }}
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcons
+                fontFamily="MaterialCommunityIcons"
+                name="home"
+                color={color}
+              />
+            ),
+          }}
           name="HomeTab"
           component={HomeStackScreen}
         />
         <Tab.Screen
-          options={{ title: "Headphones" }}
+          options={{
+            title: "Headphones",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcons
+                fontFamily="MaterialCommunityIcons"
+                name="headphones"
+                color={color}
+              />
+            ),
+          }}
           name="HeadphonesTab"
           component={HeadphonesStackScreen}
         />
         <Tab.Screen
-          options={{ title: "Earphones" }}
+          options={{
+            title: "Earphones",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcons
+                fontFamily="SimpleLineIcons"
+                name="earphones-alt"
+                color={color}
+              />
+            ),
+          }}
           name="EarphonesTab"
           component={EarphonesStackScreen}
         />
         <Tab.Screen
-          options={{ title: "Speakers" }}
+          options={{
+            title: "Speakers",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcons
+                fontFamily="MaterialCommunityIcons"
+                name="speaker"
+                color={color}
+              />
+            ),
+          }}
           name="SpeakersTab"
           component={SpeakersStackScreen}
         />
         <Tab.Screen
-          options={{ title: "Cart" }}
+          options={{
+            title: "Cart",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcons
+                fontFamily="Ionicons"
+                name="cart-outline"
+                color={color}
+              />
+            ),
+          }}
           name="CartTab"
           component={CartStackScreen}
         />

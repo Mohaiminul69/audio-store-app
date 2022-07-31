@@ -12,9 +12,9 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   const [loaded] = useFonts({
-    "Manrope-Bold": require("./assets/Fonts/manrope-bold.otf"),
-    "Manrope-Regular": require("./assets/Fonts/manrope-regular.otf"),
-    "Manrope-Medium": require("./assets/Fonts/manrope-medium.otf"),
+    "Manrope-Bold": require("./assets/fonts/Manrope-Bold.ttf"),
+    "Manrope-Regular": require("./assets/fonts/Manrope-Regular.ttf"),
+    "Manrope-Medium": require("./assets/fonts/Manrope-Medium.ttf"),
   });
 
   if (!loaded) {
