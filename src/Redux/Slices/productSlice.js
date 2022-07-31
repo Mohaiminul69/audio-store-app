@@ -45,6 +45,15 @@ export const selectStatus = (state) => state.products.status;
 export const selectFeaturedProducts = (state) =>
   state.products.products.filter((item) => item.is_featured);
 
+export const selectHeadphones = (state) =>
+  state.products.products.filter((item) => item.category === "headphones");
+
+export const selectEarphones = (state) =>
+  state.products.products.filter((item) => item.category === "earphones");
+
+export const selectSpeakers = (state) =>
+  state.products.products.filter((item) => item.category === "speakers");
+
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = productSlice.actions;
 

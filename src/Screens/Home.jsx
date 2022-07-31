@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import BannerTitle from "../Components/BannerTitle";
 import { colors, spacing } from "../Theme";
 import { AntDesign } from "@expo/vector-icons";
+import Button from "../Components/Button";
 
 const CategoryBox = ({ title, image, onPress }) => {
   return (
@@ -62,7 +63,73 @@ const CategoryBox = ({ title, image, onPress }) => {
   );
 };
 
-export default function Home() {
+const FeaturedProduct = ({ name, category, image, onPress }) => {
+  const { width, height } = useWindowDimensions();
+  return (
+    <View
+      style={{
+        marginVertical: spacing[5],
+        backgroundColor: colors.primary,
+        borderRadius: spacing[4],
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <View
+        style={{
+          borderWidth: 1,
+          borderColor: "#d8d8d8",
+          borderRadius: 400,
+          height: 320,
+          width: width - 40,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#d8d8d8",
+            borderRadius: 400,
+            height: 280,
+            width: width - 80,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            style={{ height: 172, width: 180 }}
+            resizeMode="contain"
+            source={image.source}
+          />
+        </View>
+      </View>
+
+      <View style={{ paddingBottom: spacing[8], marginTop: -spacing[7] }}>
+        <Text preset="h3" centered uppercase white>
+          {name}
+        </Text>
+        <Text preset="h3" centered uppercase white>
+          {category}
+        </Text>
+        <Text centered white style={{ width: 250, marginTop: spacing[4] }}>
+          Upgrade to premium speakers that are phenomenally build to deliver
+          truly remarkable sound.
+        </Text>
+        <Button
+          title={"SEE PRODUCT"}
+          style={{
+            backgroundColor: colors.black,
+            alignSelf: "center",
+            marginTop: spacing[5],
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default function Home({ navigation }) {
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
   const featuredProducts = useSelector(selectFeaturedProducts);
@@ -119,15 +186,36 @@ export default function Home() {
           <CategoryBox
             title="Headphones"
             image={require("../../assets/images/home-headphone.png")}
+            onPress={() => {
+              navigation.navigate("HeadphonesTab");
+            }}
           />
           <CategoryBox
             title="Speakers"
             image={require("../../assets/images/home-speaker.png")}
+            onPress={() => {
+              navigation.navigate("SpeakersTab");
+            }}
           />
           <CategoryBox
             title="Earphones"
             image={require("../../assets/images/home-earphone.png")}
+            onPress={() => {
+              navigation.navigate("EarphonesTab");
+            }}
           />
+        </View>
+        <View
+          style={{ paddingVertical: spacing[8], paddingHorizontal: spacing[4] }}
+        >
+          {featuredProducts.map((product) => (
+            <FeaturedProduct
+              key={product.id}
+              name={product.name}
+              category={product.category}
+              image={product.featuredImage}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
