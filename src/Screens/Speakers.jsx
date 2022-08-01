@@ -9,9 +9,11 @@ import Text from "../Components/Text/Text";
 import Button from "../Components/Button";
 import Footer from "../Components/Footer";
 
-export default function Speakers() {
+export default function Speakers({ navigation }) {
   const speakers = useSelector(selectSpeakers);
-  const onPressProduct = () => {};
+  const onPressProduct = (id) => {
+    navigation.navigate("Details", { id: id });
+  };
 
   return (
     <SafeAreaView>
