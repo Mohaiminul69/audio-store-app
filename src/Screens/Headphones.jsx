@@ -9,9 +9,11 @@ import Text from "../Components/Text/Text";
 import Button from "../Components/Button";
 import Footer from "../Components/Footer";
 
-export default function Headphones() {
+export default function Headphones({ navigation }) {
   const headphones = useSelector(selectHeadphones);
-  const onPressProduct = () => {};
+  const onPressProduct = (id) => {
+    navigation.navigate("Details", { id: id });
+  };
 
   return (
     <SafeAreaView>

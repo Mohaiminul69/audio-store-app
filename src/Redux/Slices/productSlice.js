@@ -54,6 +54,9 @@ export const selectEarphones = (state) =>
 export const selectSpeakers = (state) =>
   state.products.products.filter((item) => item.category === "speakers");
 
+export const selectProductsById = (state, id) =>
+  state.products.products.find((product) => product.id === id);
+
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = productSlice.actions;
 
