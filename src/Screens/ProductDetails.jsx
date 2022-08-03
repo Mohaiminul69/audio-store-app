@@ -8,6 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing } from "../Theme";
 import Button from "../Components/Button";
 import CounterButton from "../Components/CounterButton";
+import { showMessage } from "react-native-flash-message";
+import { addToCart } from "../Redux/Slices/cartSlice";
 
 export default function ProductDetails({ navigation, route }) {
   const id = route.params.id;
@@ -25,7 +27,30 @@ export default function ProductDetails({ navigation, route }) {
   const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
 
-  const add = () => {};
+  const add = () => {
+    if (amount === 0) {
+      return showMessage({
+        message: "You cannot add 0 items",
+        type: "danger",
+      });
+    }
+
+    const cartProduct = {
+      id,
+      name,
+      featuredImage,
+      price,
+      quantityPrice: price * amount,
+      amount,
+    };
+
+    dispatch(addToCart({ cartProduct }));
+
+    showMessage({
+      message: "Product added to cart",
+      type: "success",
+    });
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
